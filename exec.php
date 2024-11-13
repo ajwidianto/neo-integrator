@@ -62,6 +62,8 @@ switch ($act) {
     case "output":              include "ws/output.php";break;
 
     case "dict":                include "ws/getDict.php";break;
+
+    case "GetDetailMahasiswaLulusDO": include "ws/getDetailMahasiswaLulusDO.php"; break;
     default:
       echo "act is not list, cek exec.php";
   }
