@@ -449,6 +449,38 @@ function cariidmk(&$kodemk){
                 } else {$id_mahasiswa = "<code>Tidak Ditemukan</code>";}
         }  
 }
+// CARI ID Matakuliah ==============================================================
+function cariidmatkul($kode_mata_kuliah) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "kode_mata_kuliah='$kode_mata_kuliah'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetDetailMataKuliah', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_matkul = $ws_result[1]["data"][0];
+        return [
+            'id_matkul' => $data_matkul['id_matkul'],
+            'nama_mata_kuliah' => $data_matkul['nama_mata_kuliah'],
+            'sks_mata_kuliah' => $data_matkul['sks_mata_kuliah'],
+            'nama_program_studi' => $data_matkul['nama_program_studi'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_matkul' => "<code>ID Mata Kuliah Tidak Ditemukan</code>",
+            'nama_mata_kuliah' => "<code>Nama Mata Kuliah Tidak Ditemukan</code>",
+            'sks_mata_kuliah' => "<code>SKS Tidak Ditemukan</code>",
+            'nama_program_studi' => "<code>SKS Tidak Ditemukan</code>",
+        ];
+    }
+}
 
 // CARI ID Kelas Kuliah ==============================================================
 function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){
