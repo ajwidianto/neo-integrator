@@ -47,17 +47,20 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
+        file_put_contents('log_payload_InsertMahasiswaLulusDO.txt', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
         // Kirim request ke API
         $act = "InsertMahasiswaLulusDO";
         $request = $ws->prep_insert($act, $data);
+        print_r($request); // Debugging request
         $ws_result = $ws->run($request);
 
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
+        file_put_contents('log_response_InsertMahasiswaLulusDO.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
