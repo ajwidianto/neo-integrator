@@ -65,11 +65,11 @@ switch ($act) {
 
     case "GetDetailMahasiswaLulusDO": include "ws/getDetailMahasiswaLulusDO.php"; break;
 
-    case "insertNilaiTransferPendidikanMahasiswa": include "ws/insertNilaiTransferPendidikanMahasiswa.php"; break;
+    // case "insertNilaiTransferPendidikanMahasiswa": include "ws/insertNilaiTransferPendidikanMahasiswa.php"; break;
 
     case "insertNilaiKuliah2": include "ws/insertNilaiKuliah2.php"; break;
 
-    case "insertmhskeluar2":     include "ws/insertMahasiswaLulusDO2.php";  break;
+    case "insertnilaitransfermhs":     include "ws/insertNilaiTransferMahasiswa.php";  break;
 
     default:
       echo "act is not list, cek exec.php";

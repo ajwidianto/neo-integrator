@@ -12,7 +12,7 @@ while ($xlog = mysqli_fetch_array($log)) {
 
 $no = 1;
 if ($show == 'yes') {
-    $tampil = '<a href="?module=inject&act=mhskeluarimport2&show=no"><button type="button" class="btn btn-danger">
+    $tampil = '<a href="?module=inject&act=nilaitransfermhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
     $query = "select * from insertnilaitransfer";
     $hasil = mysqli_query($db, $query);
@@ -51,7 +51,7 @@ if ($show == 'yes') {
     }
     $total = $berhasil + $belum + $gagal;
 } else if ($show == 'berhasil') {
-    $tampil = '<a href="?module=inject&act=mhskeluarimport2&show=no"><button type="button" class="btn btn-danger">
+    $tampil = '<a href="?module=inject&act=nilaitransfermhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
     $query = "select * from insertnilaitransfer where err_no='0'";
     $hasil = mysqli_query($db, $query);
@@ -94,7 +94,7 @@ if ($show == 'yes') {
         }
     }
 } else if ($show == 'gagal') {
-    $tampil = '<a href="?module=inject&act=mhskeluarimport2&show=no"><button type="button" class="btn btn-danger">
+    $tampil = '<a href="?module=inject&act=nilaitransfermhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
     $query = "select * from insertnilaitransfer where err_no!='0' and err_no is not null";
     $hasil = mysqli_query($db, $query);
@@ -137,7 +137,7 @@ if ($show == 'yes') {
         }
     }
 } else {
-    $tampil = '<a href="?module=inject&act=mhskeluarimport2"><button type="button" class="btn btn-primary">
+    $tampil = '<a href="?module=inject&act=nilaitransfermhsimport"><button type="button" class="btn btn-primary">
     Tampilkan DATA <span class="badge bg-transparent"></span></button></a>';
     $query = "SELECT count(id) AS total, sum(err_no IS NULL) AS belum, SUM(err_no='0') AS berhasil,
     SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertnilaitransfer;";
@@ -160,14 +160,14 @@ echo '<div class="card-body">
         <button type="button" class="btn btn-primary">
             Belum Sync <span class="badge bg-transparent">' . $belum . '</span>
         </button>
-        <a href="?module=inject&act=mhskeluarimport2&show=berhasil">
+        <a href="?module=inject&act=nilaitransfermhsimport&show=berhasil">
         <button type="button" class="btn btn-success">
             Berhasil <span class="badge bg-transparent">' . $berhasil . '</span>
         </button></a>
         <button type="button" class="btn btn-success">
             Sudah Ada <span class="badge bg-transparent">' . $sudahada . '</span>
         </button>
-        <a href="?module=inject&act=mhskeluarimport2&show=gagal">
+        <a href="?module=inject&act=nilaitransfermhsimport&show=gagal">
         <button type="button" class="btn btn-danger">
             Gagal Insert <span class="badge bg-transparent">' . $gagal . '</span>
         </button></a>

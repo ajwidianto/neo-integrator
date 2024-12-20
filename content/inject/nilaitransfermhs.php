@@ -1,5 +1,5 @@
 <?php
-$sync = $weburl.'/exec.php?act=insertmhskeluar2';
+$sync = $weburl.'/exec.php?act=insertnilaitransfermhs';
 // echo $sync;
 ?>
 
@@ -22,7 +22,7 @@ $sync = $weburl.'/exec.php?act=insertmhskeluar2';
 </ul>
 
 <!-- <tbody id="datamhskeluar"> -->
-    <div id="datamhskeluarimport2">
+    <div id="datanilaitransfermhsimport">
 </div>
                     <!-- <div id="logprogress"> -->
                     </tbody>
