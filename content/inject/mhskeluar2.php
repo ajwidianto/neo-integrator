@@ -1,5 +1,5 @@
 <?php
-$sync = $weburl.'/exec.php?act=insertmhskeluar2&tipe=minim';
+$sync = $weburl.'/exec.php?act=insertmhskeluar2';
 // echo $sync;
 ?>
 
