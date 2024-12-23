@@ -1,7 +1,7 @@
 <?php
 $show = $_POST['show'];
 $berhasil = $belum = $sudahada = $gagal = 0;
-$query = "select * from progress where act='InsertNilaiTransferPendidikanMahasiswa'";
+$query = "select * from progress where act='InsertAktivitasMahasiswa'";
 $log = mysqli_query($db, $query);
 while ($xlog = mysqli_fetch_array($log)) {
     echo '<ul class="pagination pagination-primary justify-content-center">                      
@@ -14,13 +14,12 @@ $no = 1;
 if ($show == 'yes') {
     $tampil = '<a href="?module=inject&act=aktivitasmhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
-    $query = "select * from insertnilaitransfer2";
+    $query = "select * from insertaktivitasmahasiswa";
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
-        <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             if ($x['err_no'] == '0') {
                 $berhasil++;
@@ -30,18 +29,20 @@ if ($show == 'yes') {
                 $gagal++;
             }
             echo "<tr><td>" . $no++;
-            echo "</td><td>" . $x['nim'];
-            echo "</td><td>" . $x['nama_mahasiswa'];
-            echo "</td><td>" . $x['kode_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nama_mata_kuliah_asal'];
-            echo "</td><td>" . $x['sks_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nilai_huruf_asal'];
-            echo "</td><td>" . $x['id_matkul'];
-            echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
-            echo "</td><td>" . $x['nilai_huruf_diakui'];
-            echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            echo "</td><td>" . $x['program_mbkm'];
+            echo "</td><td>" . $x['id_prodi'];
+            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
+            echo "</td><td>" . $x['nama_program_studi'];
             echo "</td><td>" . $x['id_semester'];
+            echo "</td><td>" . $x['sk_tugas'];
+            echo "</td><td>" . $x['tanggal_sk_tugas'];
+            echo "</td><td>" . $x['id_jenis_aktivitas'];
+            echo "</td><td>" . $x['jenis_anggota'];
+            echo "</td><td>" . $x['judul'];
+            echo "</td><td>" . $x['keterangan'];
+            echo "</td><td>" . $x['lokasi'];
+            echo "</td><td>" . $x['tanggal_mulai'];
+            echo "</td><td>" . $x['tanggal_selesai'];
             echo "</td><td>" . $x['id_aktivitas'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
@@ -53,27 +54,28 @@ if ($show == 'yes') {
 } else if ($show == 'berhasil') {
     $tampil = '<a href="?module=inject&act=aktivitasmhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
-    $query = "select * from insertnilaitransfer2 where err_no='0'";
+    $query = "select * from insertaktivitasmahasiswa where err_no='0'";
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
-        <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
-            echo "</td><td>" . $x['nim'];
-            echo "</td><td>" . $x['nama_mahasiswa'];
-            echo "</td><td>" . $x['kode_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nama_mata_kuliah_asal'];
-            echo "</td><td>" . $x['sks_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nilai_huruf_asal'];
-            echo "</td><td>" . $x['id_matkul'];
-            echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
-            echo "</td><td>" . $x['nilai_huruf_diakui'];
-            echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            echo "</td><td>" . $x['program_mbkm'];
+            echo "</td><td>" . $x['id_prodi'];
+            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
+            echo "</td><td>" . $x['nama_program_studi'];
             echo "</td><td>" . $x['id_semester'];
+            echo "</td><td>" . $x['sk_tugas'];
+            echo "</td><td>" . $x['tanggal_sk_tugas'];
+            echo "</td><td>" . $x['id_jenis_aktivitas'];
+            echo "</td><td>" . $x['jenis_anggota'];
+            echo "</td><td>" . $x['judul'];
+            echo "</td><td>" . $x['keterangan'];
+            echo "</td><td>" . $x['lokasi'];
+            echo "</td><td>" . $x['tanggal_mulai'];
+            echo "</td><td>" . $x['tanggal_selesai'];
             echo "</td><td>" . $x['id_aktivitas'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
@@ -83,7 +85,7 @@ if ($show == 'yes') {
     }
 
     $query = "SELECT count(id) AS total, sum(err_no IS NULL) AS belum, SUM(err_no='0') AS berhasil,
-    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertnilaitransfer2;";
+    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertaktivitasmahasiswa;";
     $hitung = mysqli_query($db, $query);
     if (mysqli_num_rows($hitung) > 0) {
         while ($hit = mysqli_fetch_array($hitung)) {
@@ -96,27 +98,28 @@ if ($show == 'yes') {
 } else if ($show == 'gagal') {
     $tampil = '<a href="?module=inject&act=aktivitasmhsimport&show=no"><button type="button" class="btn btn-danger">
     SEMBUNYIKAN DATA <span class="badge bg-transparent"></span></button></a>';
-    $query = "select * from insertnilaitransfer2 where err_no!='0' and err_no is not null";
+    $query = "select * from insertaktivitasmahasiswa where err_no!='0' and err_no is not null";
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
-        <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
-            echo "</td><td>" . $x['nim'];
-            echo "</td><td>" . $x['nama_mahasiswa'];
-            echo "</td><td>" . $x['kode_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nama_mata_kuliah_asal'];
-            echo "</td><td>" . $x['sks_mata_kuliah_asal'];
-            echo "</td><td>" . $x['nilai_huruf_asal'];
-            echo "</td><td>" . $x['id_matkul'];
-            echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
-            echo "</td><td>" . $x['nilai_huruf_diakui'];
-            echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            echo "</td><td>" . $x['program_mbkm'];
+            echo "</td><td>" . $x['id_prodi'];
+            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
+            echo "</td><td>" . $x['nama_program_studi'];
             echo "</td><td>" . $x['id_semester'];
+            echo "</td><td>" . $x['sk_tugas'];
+            echo "</td><td>" . $x['tanggal_sk_tugas'];
+            echo "</td><td>" . $x['id_jenis_aktivitas'];
+            echo "</td><td>" . $x['jenis_anggota'];
+            echo "</td><td>" . $x['judul'];
+            echo "</td><td>" . $x['keterangan'];
+            echo "</td><td>" . $x['lokasi'];
+            echo "</td><td>" . $x['tanggal_mulai'];
+            echo "</td><td>" . $x['tanggal_selesai'];
             echo "</td><td>" . $x['id_aktivitas'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
@@ -126,7 +129,7 @@ if ($show == 'yes') {
     }
 
     $query = "SELECT count(id) AS total, sum(err_no IS NULL) AS belum, SUM(err_no='0') AS berhasil,
-    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertnilaitransfer2;";
+    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertaktivitasmahasiswa;";
     $hitung = mysqli_query($db, $query);
     if (mysqli_num_rows($hitung) > 0) {
         while ($hit = mysqli_fetch_array($hitung)) {
@@ -140,7 +143,7 @@ if ($show == 'yes') {
     $tampil = '<a href="?module=inject&act=aktivitasmhsimport"><button type="button" class="btn btn-primary">
     Tampilkan DATA <span class="badge bg-transparent"></span></button></a>';
     $query = "SELECT count(id) AS total, sum(err_no IS NULL) AS belum, SUM(err_no='0') AS berhasil,
-    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertnilaitransfer2;";
+    SUM(err_no IS NOT NULL AND err_no!='0') AS gagal FROM insertaktivitasmahasiswa;";
     $hitung = mysqli_query($db, $query);
     if (mysqli_num_rows($hitung) > 0) {
         while ($hit = mysqli_fetch_array($hitung)) {

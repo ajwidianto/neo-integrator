@@ -1,7 +1,7 @@
 <?php
 
 $ModuleName = "AKTIVITAS MAHASISWA";
-$table = "insertnilaitransfer2";
+$table = "insertaktivitasmahasiswa";
 $link1 = $_SERVER['PHP_SELF'] . '?module=' . $module . '&aksi=tambah'; // tambah data
 $link2 = "index.php?module=inject&act=" . $module; // Lihat Data / Lanjutkan Sync
 $link3 = $_SERVER['PHP_SELF'] . '?module=' . $module . '&aksi=kosongkan'; // Kosongkan Data
@@ -90,40 +90,40 @@ if (mysqli_num_rows($hasil) > 0) {
                                                                                 <div class="card-header">
                                                                                     <table class='table table-striped' id='table1' border='1'>
                                                                                         <tr>
-                                                                                            <th>NIMxxx</th>
-                                                                                            <th>Kode Matkul Asal</th>
-                                                                                            <th>Nama Matkul Asal</th>
-                                                                                            <th>SKS Matkul Asal</th>
-                                                                                            <th>Nilai Huruf Asal</th>
-                                                                                            <th>ID Matkul</th>
-                                                                                            <th>SKS Matkul Diakui</th>
-                                                                                            <th>Nilai Huruf Diakui</th>
-                                                                                            <th>Nilai Angka Diakui</th>
-                                                                                            <th>ID Perguruan Tinggi</th>
+                                                                                            <th>Program MBKM</th>
+                                                                                            <th>Kode Program Studi</th>
                                                                                             <th>ID Semester</th>
-                                                                                            <th>ID Aktivitas</th>
+                                                                                            <th>Nomor SK Tugas</th>
+                                                                                            <th>Tanggal SK Tugas</th>
+                                                                                            <th>Jenis Aktivitas</th>
+                                                                                            <th>Jenis Anggota</th>
+                                                                                            <th>Judul</th>
+                                                                                            <th>Keterangan</th>
+                                                                                            <th>Lokasi</th>
+                                                                                            <th>Tanggal Mulai</th>
+                                                                                            <th>Tanggal Akhir</th>
                                                                                         </tr>
 
                                                                                         <tr>
-                                                                                            <td>Nomor Induk Mahasiswa</td>
-                                                                                            <td>Kode Kelas Kuliah<br>CII633</td>
-                                                                                            <td>Nama Kelas Kuliah<br>ANALISIS ALGORITMA</td>
-                                                                                            <td>Jumlah SKS</td>
-                                                                                            <td>Nilai Huruf <br> A,B,C,D,E</td>
-                                                                                            <td>ID Matkul</td>
-                                                                                            <td>Jumlah SKS</td>
-                                                                                            <td>Nilai Huruf <br> A,B,C,D,E</td>
-                                                                                            <td>Nilai Index <br> Skala 4</td>
-                                                                                            <td>ID Perguruan Tinggi</td>
+                                                                                            <td>Program MBKM</td>
+                                                                                            <td>Kode Program Studi<br>55201</td>
                                                                                             <td>ID Semester</td>
-                                                                                            <td>ID Aktivitas</td>
+                                                                                            <td>Nomor SK Tugas</td>
+                                                                                            <td>Tanggal SK Tugas<br>yyyy-mm-dd</td>
+                                                                                            <td>Jenis Aktivitas</td>
+                                                                                            <td>Jenis Anggota</td>
+                                                                                            <td>Judul</td>
+                                                                                            <td>Keterangan</td>
+                                                                                            <td>Lokasi</td>
+                                                                                            <td>Tanggal Mulai<br>yyyy-mm-dd</td>
+                                                                                            <td>Tanggal Akhir<br>yyyy-mm-dd</td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>contoh :</td>
                                                                                             <td colspan='7'>
                                                                                                 <code>
-                                                                                                    <pre>1903017025    CII633    ANALISIS ALGORITMA    3    B+    f711fc47-76af-47a7-8876-b31bc9c598f0    3    AB    3.5    861d9a64-9495-4688-a528-899fcca1c1e8    20231    20dfc199-0d4a-43c2-8cbb-03d698aae8f0
-1903017009    UKJXA2    KEWARGANEGARAAN    2    A    a60f8e03-c524-4df1-8e95-87d0970cca65    2    A    4   861d9a64-9495-4688-a528-899fcca1c1e8   20232    20dfc199-0d4a-43c2-8cbb-03d698aae8f0</pre>
+                                                                                                    <pre>1	55201	20241	043/Pasca.6/II/2020	2024-11-23	3	0	Testing Uploader WS	Testing uploader webservice menggunakan php	Bandung	2024-11-24	2024-12-23
+                                                                                                    </pre>
                                                                                                 </code>
                                                                                             </td>
                                                                                         </tr>
@@ -217,75 +217,56 @@ if (mysqli_num_rows($hasil) > 0) {
                                 $input = $_POST['input'];
                                 $line = explode("\n", $input);
                                 echo "<table class='table table-striped' id='table1' border='1'><tr>
-    <th>Baris</th><th>NIM</th><th>NAMA</th><th>ID_Reg_mhs</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th>
-    <th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th><th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th><th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th></tr>";
+    <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang Pendidikan</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+    <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th></tr>";
                                 foreach ($line as $baris) {
                                     $baris = explode("\t", $baris);
                                     if (isset($baris[2])) {
                                         $no++;
                                         str_replace('"', '', $baris);
-                                        $nim = $prodi = $id_reg_mhs = $nama = $baris[0];
-                                        // $tanggalkeluar = date("Y-m-d", strtotime($baris[2]));
-                                        cariidregmhs($nim, $id_reg_mhs, $nama, $prodi);
-                                        // cariidmatkul($id_matkul);
-                                        $nama_mahasiswa = $nama;
-                                        $kode_mata_kuliah_asal = $baris[1];
-                                        // $nama_mata_kuliah_asal = $baris[2];
-                                        // $sks_mata_kuliah_asal = $baris[3];
-                                        $nilai_huruf_asal = $baris[2];
-                                        // $id_matkul = cariidmatkul($kode_mata_kuliah_asal);
-                                        $data_matkul = cariidmatkul($kode_mata_kuliah_asal);
-                                        // $sks_mata_kuliah_diakui = $baris[5];
-                                        $nilai_huruf_diakui = $baris[3];
-                                        $nilai_angka_diakui = isset($baris[4]) ? $baris[4] : '';
-                                        $id_perguruan_tinggi = $baris[5];
-                                        $id_semester = $baris[6];
-                                        // $id_aktivitas = $baris[7];
-                                        // $id_jenis_keluar = $baris[1];
-                                        // $id_periode_keluar = $baris[3];
-                                        // $ipk = isset($baris[4]) ? $baris[4] : '';
-                                        // $nomor_ijazah = isset($baris[5]) ? $baris[5] : '';
-                                        // $nomor_sk_yudisium = isset($baris[6]) ? $baris[6] : '';
-                                        // $tanggal_sk_yudisium = isset($baris[7]) ? date("Y-m-d", strtotime($baris[7])) : '';
+                                        $program_mbkm = $baris[0];
+                                        $kode_program_studi = $baris[1];
+                                        $data_prodi = cariidprodi($kode_program_studi);
+                                        $id_semester = $baris[2];
+                                        $sk_tugas = $baris[3];
+                                        $tanggal_sk_tugas = $baris[4];
+                                        $id_jenis_aktivitas = $baris[5];
+                                        $jenis_anggota = $baris[6];
+                                        $judul = $baris[7];
+                                        $keterangan = $baris[8];
+                                        $lokasi = $baris[9];
+                                        $tanggal_mulai = $baris[10];
+                                        $tanggal_selesai = $baris[11];
 
                                         echo "<tr><td>" . $no;
-                                        echo "</td><td>" . $nim;
-                                        echo "</td><td>" . $nama;
-                                        echo "</td><td>" . $id_reg_mhs;
-                                        echo "</td><td>" . $kode_mata_kuliah_asal;
-                                        echo "</td><td>" . $data_matkul['nama_mata_kuliah'];
-                                        echo "</td><td>" . $data_matkul['sks_mata_kuliah'];
-                                        echo "</td><td>" . $nilai_huruf_asal;
-                                        echo "</td><td>" . $data_matkul['id_matkul'];
-                                        echo "</td><td>" . $data_matkul['sks_mata_kuliah'];
-                                        echo "</td><td>" . $nilai_huruf_diakui;
-                                        echo "</td><td>" . $nilai_angka_diakui;
-                                        echo "</td><td>" . $id_perguruan_tinggi;
-                                        echo "</td><td>" . $id_semester . "</td></tr>";
-                                        // echo "</td><td>" . $id_aktivitas . "</td></tr>";
-                                        // echo "</td><td>" . $id_jenis_keluar;
-                                        // echo "</td><td>" . $tanggalkeluar;
-                                        // echo "</td><td>" . $id_periode_keluar;
-                                        // echo "</td><td>" . $ipk;
-                                        // echo "</td><td>" . $nomor_ijazah;
-                                        // echo "</td><td>" . $nomor_sk_yudisium;
-                                        // echo "</td><td>" . $tanggal_sk_yudisium . "</td></tr>";
+                                        echo "</td><td>" . $program_mbkm;
+                                        echo "</td><td>" . $data_prodi['id_prodi'];
+                                        echo "</td><td>" . $data_prodi['nama_jenjang_pendidikan'];
+                                        echo "</td><td>" . $data_prodi['nama_program_studi'];
+                                        echo "</td><td>" . $id_semester;
+                                        echo "</td><td>" . $sk_tugas;
+                                        echo "</td><td>" . $tanggal_sk_tugas;
+                                        echo "</td><td>" . $id_jenis_aktivitas;
+                                        echo "</td><td>" . $jenis_anggota;
+                                        echo "</td><td>" . $judul;
+                                        echo "</td><td>" . $keterangan;
+                                        echo "</td><td>" . $lokasi;
+                                        echo "</td><td>" . $tanggal_mulai;
+                                        echo "</td><td>" . $tanggal_selesai . "</td></tr>";
                                         
                                         // Pastikan $data_matkul sudah terisi sebelum bagian ini
-                                        $nama_mata_kuliah_asal = $data_matkul['nama_mata_kuliah'] ?? 'Tidak Ditemukan';
-                                        $sks_mata_kuliah_asal = $data_matkul['sks_mata_kuliah'] ?? 0;
-                                        $id_matkul = $data_matkul['id_matkul'] ?? 'Tidak Ditemukan';
-                                        $sks_mata_kuliah_diakui = $sks_mata_kuliah_asal; // Jika SKS diakui sama dengan SKS asal
-                                        $nama_program_studi = $data_matkul['nama_program_studi'];
+                                        $id_prodi = $data_prodi['id_prodi'] ?? 'Tidak Ditemukan';
+                                        $nama_jenjang_pendidikan = $data_prodi['nama_jenjang_pendidikan'] ?? 'Tidak Ditemukan';
+                                        $nama_program_studi = $data_prodi['nama_program_studi'] ?? 'Tidak Ditemukan';
 
-                                        $insert = "INSERT INTO insertnilaitransfer2 (
-                                            id_registrasi_mahasiswa, nim, nama_mahasiswa, kode_mata_kuliah_asal, nama_mata_kuliah_asal, 
-                                            sks_mata_kuliah_asal, nilai_huruf_asal, id_matkul, sks_mata_kuliah_diakui, nilai_huruf_diakui, nilai_angka_diakui, 
-                                            id_perguruan_tinggi, id_semester, nama_program_studi, insertid
+                                        $insert = "INSERT INTO insertaktivitasmahasiswa (
+                                            id_prodi, nama_jenjang_pendidikan, nama_program_studi, id_semester, judul, keterangan, lokasi, 
+                                            program_mbkm, id_jenis_aktivitas, jenis_anggota, sk_tugas, tanggal_sk_tugas, tanggal_mulai, tanggal_selesai, 
+                                            insertid
                                         ) VALUES (
-                                            '$id_reg_mhs', '$nim', '$nama_mahasiswa', '$kode_mata_kuliah_asal', '$nama_mata_kuliah_asal', 
-                                            '$sks_mata_kuliah_asal', '$nilai_huruf_asal', '$id_matkul', '$sks_mata_kuliah_diakui', '$nilai_huruf_diakui', 
-                                            '$nilai_angka_diakui', '$id_perguruan_tinggi', '$id_semester', '$nama_program_studi', '$insertid'
+                                            '$id_prodi', '$nama_jenjang_pendidikan', '$nama_program_studi', '$id_semester', '$judul', '$keterangan', '$lokasi', 
+                                            '$program_mbkm', '$id_jenis_aktivitas', '$jenis_anggota', '$sk_tugas', '$tanggal_sk_tugas', '$tanggal_mulai', 
+                                            '$tanggal_selesai', '$insertid'
                                         )";
                                         mysqli_query($db, $insert);
                                     }

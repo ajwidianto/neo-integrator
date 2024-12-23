@@ -1,6 +1,6 @@
 <?php
 echo "Jangan Tutup Browser Ini Hingga Proses Selesai";
-$query = "SELECT * from insertnilaitransfer2 where err_no is null or err_no != '0' order by id ASC";
+$query = "SELECT * from insertaktivitasmahasiswa where err_no is null or err_no != '0' order by id ASC";
 // echo $query;
 $hasil = mysqli_query($db, $query);
 
@@ -9,18 +9,18 @@ if (mysqli_num_rows($hasil) > 0) {
         $id = $x['id'];
 
         $data = array(
-            'id_registrasi_mahasiswa' => $x['id_registrasi_mahasiswa'],
-            'kode_mata_kuliah_asal' => $x['kode_mata_kuliah_asal'],
-            'nama_mata_kuliah_asal' => $x['nama_mata_kuliah_asal'],
-            'sks_mata_kuliah_asal' => $x['sks_mata_kuliah_asal'],
-            'nilai_huruf_asal' => $x['nilai_huruf_asal'],
-            'id_matkul' => $x['id_matkul'],
-            'sks_mata_kuliah_diakui' => $x['sks_mata_kuliah_diakui'],
-            'nilai_huruf_diakui' => $x['nilai_huruf_diakui'],
-            'nilai_angka_diakui' => $x['nilai_angka_diakui'],
-            'id_perguruan_tinggi' => $x['id_perguruan_tinggi'],
+            'program_mbkm' => $x['program_mbkm'],
+            'jenis_anggota' => $x['jenis_anggota'],
+            'id_jenis_aktivitas' => $x['id_jenis_aktivitas'],
+            'id_prodi' => $x['id_prodi'],
             'id_semester' => $x['id_semester'],
-            'id_aktivitas' => $x['id_aktivitas']
+            'judul' => $x['judul'],
+            'keterangan' => $x['keterangan'],
+            'lokasi' => $x['lokasi'],
+            'sk_tugas' => $x['sk_tugas'],
+            'tanggal_sk_tugas' => $x['tanggal_sk_tugas'],
+            'tanggal_mulai' => $x['tanggal_mulai'],
+            'tanggal_selesai' => $x['tanggal_selesai']
         );
 
         // Debugging payload sebelum dikirim
@@ -31,7 +31,7 @@ if (mysqli_num_rows($hasil) > 0) {
         flush();
 
         // Kirim request ke API
-        $act = "InsertNilaiTransferPendidikanMahasiswa";
+        $act = "InsertAktivitasMahasiswa";
         $request = $ws->prep_insert($act, $data);
         print_r($request); // Debugging request
         $ws_result = $ws->run($request);
@@ -47,14 +47,15 @@ if (mysqli_num_rows($hasil) > 0) {
         $err_desc = $ws_result[1]["error_desc"];
 
         if ($err_code == 0) {
-            $id_registrasi_mahasiswa = $ws_result[1]['data']["id_registrasi_mahasiswa"];
-            $update = "UPDATE insertnilaitransfer2 SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            // $id_registrasi_mahasiswa = $ws_result[1]['data']["id_registrasi_mahasiswa"];
+            $id_aktivitas = $ws_result[1]['data']["id_aktivitas"];
+            $update = "UPDATE insertaktivitasmahasiswa SET err_no='$err_code', err_desc='$err_desc', id_aktivitas='$id_aktivitas' WHERE id=$id";
             mysqli_query($db, $update);
-            $statprogress = "<br>" . $id . ". " . $id_registrasi_mahasiswa;
+            $statprogress = "<br>" . $id . ". " . $id_activitas;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertnilaitransfer2 SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertaktivitasmahasiswa SET err_no='$err_code', err_desc='$err_desc', id_aktivitas='$id_aktivitas' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);

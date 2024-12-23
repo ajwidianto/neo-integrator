@@ -481,6 +481,38 @@ function cariidmatkul($kode_mata_kuliah) {
         ];
     }
 }
+// CARI ID Prodi =====================================================================
+function cariidprodi($kode_program_studi) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "kode_program_studi='$kode_program_studi'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetProdi', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_matkul = $ws_result[1]["data"][0];
+        return [
+            'id_prodi' => $data_matkul['id_prodi'],
+            'nama_program_studi' => $data_matkul['nama_program_studi'],
+            'id_jenjang_pendidikan' => $data_matkul['id_jenjang_pendidikan'],
+            'nama_jenjang_pendidikan' => $data_matkul['nama_jenjang_pendidikan'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_prodi' => "<code>ID Program Studi Tidak Ditemukan</code>",
+            'nama_program_studi' => "<code>Nama Program Studi Tidak Ditemukan</code>",
+            'id_jenjang_pendidikan' => "<code>ID Jenjang Pendidikan Tidak Ditemukan</code>",
+            'nama_jenjang_pendidikan' => "<code>Nama Jenjang Pendidikan Tidak Ditemukan</code>",
+        ];
+    }
+}
 
 // CARI ID Kelas Kuliah ==============================================================
 function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){
