@@ -16,11 +16,11 @@ if (mysqli_num_rows($hasil) > 0) {
             'id_semester' => $x['id_semester'],
             'judul' => $x['judul'],
             'keterangan' => $x['keterangan'],
-            'lokasi' => $x['lokasi'],
-            'sk_tugas' => $x['sk_tugas'],
-            'tanggal_sk_tugas' => $x['tanggal_sk_tugas'],
-            'tanggal_mulai' => $x['tanggal_mulai'],
-            'tanggal_selesai' => $x['tanggal_selesai']
+            'lokasi' => $x['lokasi']
+            // 'sk_tugas' => $x['sk_tugas'],
+            // 'tanggal_sk_tugas' => $x['tanggal_sk_tugas'],
+            // 'tanggal_mulai' => $x['tanggal_mulai'],
+            // 'tanggal_selesai' => $x['tanggal_selesai']
         );
 
         // Debugging payload sebelum dikirim
