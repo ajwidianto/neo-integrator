@@ -206,7 +206,9 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $no++;
                                         str_replace('"', '', $baris);
                                         $nim = $prodi = $id_reg_mhs = $nama = $baris[0];
+                                        $nim = $baris[0];
                                         cariidregmhs($nim, $id_reg_mhs, $nama, $prodi);
+                                        $datamahasiswa = cariidmahasiswa($nim);
                                         $nama_mahasiswa = $nama;
                                         $id_aktivitas = $baris[1];
                                         $jenis_peran = $baris[2];
@@ -214,9 +216,13 @@ if (mysqli_num_rows($hasil) > 0) {
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $id_aktivitas;
                                         echo "</td><td>" . $nim;
-                                        echo "</td><td>" . $nama;
-                                        echo "</td><td>" . $id_reg_mhs;
+                                        echo "</td><td>" . $datamahasiswa['nama_mahasiswa'];
+                                        echo "</td><td>" . $datamahasiswa['id_registrasi_mahasiswa'];
                                         echo "</td><td>" . $jenis_peran . "</td></tr>";
+
+                                        // Pastikan $datadosen sudah terisi sebelum bagian ini
+                                        // $nama_mahasiswa = $datamahasiswa['nama_mahasiswa'] ?? 'Tidak Ditemukan';
+                                        // $id_reg_mhs = $datamahasiswa['id_registrasi_mahasiswa'] ?? 'Tidak Ditemukan';
 
                                         $insert = "INSERT INTO insertanggotaaktivitasmahasiswa (
                                             id_aktivitas, nim, nama_mahasiswa, id_reg_mahasiswa, jenis_peran, insertid
