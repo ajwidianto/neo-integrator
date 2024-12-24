@@ -513,6 +513,34 @@ function cariidprodi($kode_program_studi) {
         ];
     }
 }
+// CARI ID Dosen =====================================================================
+function cariiddosen($nidn) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "nidn='$nidn'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListDosen', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_dosen = $ws_result[1]["data"][0];
+        return [
+            'id_dosen' => $data_dosen['id_dosen'],
+            'nama_dosen' => $data_dosen['nama_dosen'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_dosen' => "<code>ID Dosen Tidak Ditemukan</code>",
+            'nama_dosen' => "<code>Nama Dosen Tidak Ditemukan</code>",
+        ];
+    }
+}
 
 // CARI ID Kelas Kuliah ==============================================================
 function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){
