@@ -217,7 +217,7 @@ if (mysqli_num_rows($hasil) > 0) {
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $id_aktivitas;
                                         echo "</td><td>" . $nidn;
-                                        echo "</td><td>" . $datadosen['nama_dosen'];;
+                                        echo "</td><td>" . $datadosen['nama_dosen'];
                                         echo "</td><td>" . $datadosen['id_dosen'];
                                         echo "</td><td>" . $id_kategori_kegiatan;
                                         echo "</td><td>" . $penguji_ke . "</td></tr>";
