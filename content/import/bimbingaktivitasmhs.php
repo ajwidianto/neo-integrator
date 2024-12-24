@@ -91,20 +91,22 @@ if (mysqli_num_rows($hasil) > 0) {
                                                                                     <table class='table table-striped' id='table1' border='1'>
                                                                                         <tr>
                                                                                             <th>ID Aktivitas</th>
-                                                                                            <th>NIM</th>
-                                                                                            <th>Jenis Peran</th>
+                                                                                            <th>NIDN</th>
+                                                                                            <th>Kategori Kegiatan</th>
+                                                                                            <th>Pembimbing Ke-</th>
                                                                                         </tr>
 
                                                                                         <tr>
                                                                                             <td>ID Aktivitas</td>
-                                                                                            <td>Nomor Induk Mahasiswa</td>
-                                                                                            <td>1 : Ketua; 2 : Anggota; 3 : Personal</td>
+                                                                                            <td>Nomor Induk Dosen Nasional</td>
+                                                                                            <td>Contoh:<br>111102</td>
+                                                                                            <td>Pembimbing 1, 2 dst</td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>contoh :</td>
                                                                                             <td colspan='7'>
                                                                                                 <code>
-                                                                                                    <pre>1903017025	3557d958-d07e-4cdb-ba82-d6c9c5ef315e	3
+                                                                                                    <pre>0330038303	e60ffa25-06e0-4b85-821f-aa9868c3a610	111102	1
                                                                                                     </pre>
                                                                                                 </code>
                                                                                             </td>
