@@ -573,6 +573,36 @@ function cariidmahasiswa($nim) {
         ];
     }
 }
+// CARI Data Kelas Kuliah =====================================================================
+function caridatakelaskuliah($id_kelas_kuliah) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "id_kelas_kuliah='$id_kelas_kuliah'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListKelasKuliah', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_kelas_kuliah = $ws_result[1]["data"][0];
+        return [
+            'id_dosen' => $data_kelas_kuliah['id_dosen'],
+            'nama_dosen' => $data_kelas_kuliah['nama_dosen'],
+            'nama_mata_kuliah' => $data_kelas_kuliah['nama_mata_kuliah'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_dosen' => "<code>ID Dosen Tidak Ditemukan</code>",
+            'nama_dosen' => "<code>Nama Dosen Tidak Ditemukan</code>",
+            'nama_mata_kuliah' => "<code>Nama Mata Kuliah Tidak Ditemukan</code>",
+        ];
+    }
+}
 
 // CARI ID Kelas Kuliah ==============================================================
 function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){

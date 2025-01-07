@@ -79,6 +79,8 @@ switch ($act) {
 
     case "insertujiaktivitasmhs":     include "ws/insertUjiMahasiswa.php";  break;
 
+    case "insertkomponenevaluasikelas":     include "ws/insertKomponenEvaluasiKelas.php";  break;
+
     default:
       echo "act is not list, cek exec.php";
   }
