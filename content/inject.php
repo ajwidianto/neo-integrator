@@ -42,6 +42,7 @@ switch ($act) {
     case "ujiaktivitasmhsimport":     $name = "Uji Aktivitas Mahasiswa";    include "content/inject/ujiaktivitasmhs.php";break;
     case "rencanaevaluasiimport":     $name = "Rencana Evaluasi";    include "content/inject/rencanaevaluasi.php";break;
     case "komponenevaluasikelasimport":     $name = "Komponen Evaluasi Kelas";    include "content/inject/komponenevaluasikelas.php";break;
+    case "dosenpengajarkelaskuliahimport":     $name = "Dosen Pengajar Kelas Kuliah";    include "content/inject/dosenpengajarkelaskuliah.php";break;
     
       case "getMahasiswa":
       include "ws/getMahasiswa.php";break;

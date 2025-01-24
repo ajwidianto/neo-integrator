@@ -541,6 +541,34 @@ function cariiddosen($nidn) {
         ];
     }
 }
+// CARI ID Registrasi Dosen ==========================================================
+function cariidregdosen($nama_dosen) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "nama_dosen='$nama_dosen'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListPenugasanDosen', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_dosen = $ws_result[1]["data"][0];
+        return [
+            'id_registrasi_dosen' => $data_dosen['id_registrasi_dosen'],
+            'nama_program_studi' => $data_dosen['nama_program_studi'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_registrasi_dosen' => "<code>ID Registrasi Dosen Tidak Ditemukan</code>",
+            'nama_program_studi' => "<code>Nama Program Studi Tidak Ditemukan</code>",
+        ];
+    }
+}
 // CARI ID Mahasiswa =================================================================
 function cariidmahasiswa($nim) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
@@ -600,6 +628,36 @@ function caridatakelaskuliah($id_kelas_kuliah) {
             'id_dosen' => "<code>ID Dosen Tidak Ditemukan</code>",
             'nama_dosen' => "<code>Nama Dosen Tidak Ditemukan</code>",
             'nama_mata_kuliah' => "<code>Nama Mata Kuliah Tidak Ditemukan</code>",
+        ];
+    }
+}
+// CARI Data Kelas Kuliah 2 =====================================================================
+function caridatakelaskuliah2($kode_mata_kuliah, $nama_kelas_kuliah) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "kode_mata_kuliah='$kode_mata_kuliah' and nama_kelas_kuliah='$nama_kelas_kuliah'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListKelasKuliah', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_kelas_kuliah = $ws_result[1]["data"][0];
+        return [
+            'id_kelas_kuliah' => $data_kelas_kuliah['id_kelas_kuliah'],
+            'nama_mata_kuliah' => $data_kelas_kuliah['nama_mata_kuliah'],
+            'sks' => $data_kelas_kuliah['sks'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_kelas_kuliah' => "<code>ID Kelas Kuliah Tidak Ditemukan</code>",
+            'nama_mata_kuliah' => "<code>Nama Mata Kuliah Tidak Ditemukan</code>",
+            'sks' => "<code>SKS Tidak Ditemukan</code>",
         ];
     }
 }
