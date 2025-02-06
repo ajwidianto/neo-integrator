@@ -661,6 +661,38 @@ function caridatakelaskuliah2($kode_mata_kuliah, $nama_kelas_kuliah) {
         ];
     }
 }
+// CARI Data Kelas Kuliah 2 Extend =====================================================================
+function caridatakelaskuliah2ext($id_kelas_kuliah) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "id_kelas_kuliah='$id_kelas_kuliah'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListKelasKuliah', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_kelas_kuliah = $ws_result[1]["data"][0];
+        return [
+            'kode_mata_kuliah' => $data_kelas_kuliah['kode_mata_kuliah'],
+            'nama_mata_kuliah' => $data_kelas_kuliah['nama_mata_kuliah'],
+            'nama_kelas_kuliah' => $data_kelas_kuliah['nama_kelas_kuliah'],
+            'sks' => $data_kelas_kuliah['sks'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'kode_mata_kuliah' => "<code>Kode Kelas Kuliah Tidak Ditemukan</code>",
+            'nama_mata_kuliah' => "<code>Nama Mata Kuliah Tidak Ditemukan</code>",
+            'nama_kelas_kuliah' => "<code>Nama Kelas Kuliah Tidak Ditemukan</code>",
+            'sks' => "<code>SKS Tidak Ditemukan</code>",
+        ];
+    }
+}
 
 // CARI ID Kelas Kuliah ==============================================================
 function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){
