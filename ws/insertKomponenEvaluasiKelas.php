@@ -20,7 +20,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
-        file_put_contents('log_payload_InsertKomponenEvaluasiKelas.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. TXT\log_payload_InsertKomponenEvaluasiKelas.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertKomponenEvaluasiKelas.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -33,7 +34,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
-        file_put_contents('log_response_InsertKomponenEvaluasiKelas.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. TXT\log_response_InsertKomponenEvaluasiKelas.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertKomponenEvaluasiKelas.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
@@ -41,13 +43,14 @@ if (mysqli_num_rows($hasil) > 0) {
         $err_desc = $ws_result[1]["error_desc"];
 
         if ($err_code == 0) {
-            $update = "UPDATE insertkomponenevaluasikelas SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $id_komponen_evaluasi = $ws_result[1]['data']["id_komponen_evaluasi"];
+            $update = "UPDATE insertkomponenevaluasikelas SET err_no='$err_code', err_desc='$err_desc', id_komponen_evaluasi='$id_komponen_evaluasi' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertkomponenevaluasikelas SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertkomponenevaluasikelas SET err_no='$err_code', err_desc='$err_desc', id_komponen_evaluasi='$id_komponen_evaluasi' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);
@@ -55,7 +58,7 @@ if (mysqli_num_rows($hasil) > 0) {
         }
 
         // Tambahkan delay untuk menghindari throttling API
-        sleep(5); // Delay 1 detik
+        // sleep(5); // Delay 1 detik
     }
 } else {
     echo "data tidak ditemukan";
