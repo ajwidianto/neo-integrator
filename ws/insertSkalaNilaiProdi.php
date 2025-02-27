@@ -59,7 +59,7 @@ if (mysqli_num_rows($hasil) > 0) {
         }
 
         // Tambahkan delay untuk menghindari throttling API
-        sleep(5); // Delay 1 detik
+        // sleep(5); // Delay 1 detik
     }
 } else {
     echo "data tidak ditemukan";
