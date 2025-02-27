@@ -47,7 +47,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
-        file_put_contents('log_payload_InsertMahasiswaLulusDO.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. TXT\log_payload_InsertMahasiswaLulusDO.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertMahasiswaLulusDO.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -60,7 +61,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
-        file_put_contents('log_response_InsertMahasiswaLulusDO.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. TXT\log_response_InsertMahasiswaLulusDO.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertMahasiswaLulusDO.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
@@ -69,13 +71,13 @@ if (mysqli_num_rows($hasil) > 0) {
 
         if ($err_code == 0) {
             $id_registrasi_mahasiswa = $ws_result[1]['data']["id_registrasi_mahasiswa"];
-            $update = "UPDATE insertmahasiswalulusdo SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertmahasiswalulusdo SET err_no='$err_code', err_desc='$err_desc', id_registrasi_mahasiswa='$id_registrasi_mahasiswa' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . ". " . $id_registrasi_mahasiswa;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertmahasiswalulusdo SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertmahasiswalulusdo SET err_no='$err_code', err_desc='$err_desc', id_registrasi_mahasiswa='$id_registrasi_mahasiswa' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);
