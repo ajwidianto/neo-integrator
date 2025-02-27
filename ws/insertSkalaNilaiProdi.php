@@ -21,7 +21,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
-        file_put_contents('log_payload_InsertSkalaNilaiProdi.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. TXT\log_payload_InsertSkalaNilaiProdi.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertSkalaNilaiProdi.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -34,7 +35,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
-        file_put_contents('log_response_InsertSkalaNilaiProdi.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. TXT\log_response_InsertSkalaNilaiProdi.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertSkalaNilaiProdi.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
@@ -42,13 +44,14 @@ if (mysqli_num_rows($hasil) > 0) {
         $err_desc = $ws_result[1]["error_desc"];
 
         if ($err_code == 0) {
-            $update = "UPDATE insertskalanilaiprodi SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $id_bobot_nilai = $ws_result[1]['data']["id_bobot_nilai"];
+            $update = "UPDATE insertskalanilaiprodi SET err_no='$err_code', err_desc='$err_desc', id_bobot_nilai='$id_bobot_nilai' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertskalanilaiprodi SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertskalanilaiprodi SET err_no='$err_code', err_desc='$err_desc', id_bobot_nilai='$id_bobot_nilai' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);
