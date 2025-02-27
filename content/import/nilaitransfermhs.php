@@ -218,35 +218,25 @@ if (mysqli_num_rows($hasil) > 0) {
                                 $line = explode("\n", $input);
                                 echo "<table class='table table-striped' id='table1' border='1'><tr>
     <th>Baris</th><th>NIM</th><th>NAMA</th><th>ID_Reg_mhs</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th>
-    <th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th><th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th><th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th></tr>";
+    <th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th><th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th><th>ID PT</th><th>Nama Prodi</th><th>ID Semester</th><th>ID Aktivitas</th></tr>";
                                 foreach ($line as $baris) {
                                     $baris = explode("\t", $baris);
                                     if (isset($baris[2])) {
                                         $no++;
                                         str_replace('"', '', $baris);
                                         $nim = $prodi = $id_reg_mhs = $nama = $baris[0];
-                                        // $tanggalkeluar = date("Y-m-d", strtotime($baris[2]));
                                         cariidregmhs($nim, $id_reg_mhs, $nama, $prodi);
-                                        // cariidmatkul($id_matkul);
                                         $nama_mahasiswa = $nama;
                                         $kode_mata_kuliah_asal = $baris[1];
-                                        // $nama_mata_kuliah_asal = $baris[2];
-                                        // $sks_mata_kuliah_asal = $baris[3];
                                         $nilai_huruf_asal = $baris[2];
-                                        // $id_matkul = cariidmatkul($kode_mata_kuliah_asal);
-                                        $data_matkul = cariidmatkul($kode_mata_kuliah_asal);
-                                        // $sks_mata_kuliah_diakui = $baris[5];
                                         $nilai_huruf_diakui = $baris[3];
+                                        // $sks = $baris[4];
                                         $nilai_angka_diakui = isset($baris[4]) ? $baris[4] : '';
                                         $id_perguruan_tinggi = $baris[5];
-                                        $id_semester = $baris[6];
-                                        // $id_aktivitas = $baris[7];
-                                        // $id_jenis_keluar = $baris[1];
-                                        // $id_periode_keluar = $baris[3];
-                                        // $ipk = isset($baris[4]) ? $baris[4] : '';
-                                        // $nomor_ijazah = isset($baris[5]) ? $baris[5] : '';
-                                        // $nomor_sk_yudisium = isset($baris[6]) ? $baris[6] : '';
-                                        // $tanggal_sk_yudisium = isset($baris[7]) ? date("Y-m-d", strtotime($baris[7])) : '';
+                                        $id_prodi = $baris[6];
+                                        $id_semester = $baris[7];
+                                        $other = $baris[8];
+                                        $data_matkul = cariidmatkul2($kode_mata_kuliah_asal, $id_prodi);
 
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $nim;
@@ -255,12 +245,15 @@ if (mysqli_num_rows($hasil) > 0) {
                                         echo "</td><td>" . $kode_mata_kuliah_asal;
                                         echo "</td><td>" . $data_matkul['nama_mata_kuliah'];
                                         echo "</td><td>" . $data_matkul['sks_mata_kuliah'];
+                                        // echo "</td><td>" . $sks;
                                         echo "</td><td>" . $nilai_huruf_asal;
                                         echo "</td><td>" . $data_matkul['id_matkul'];
                                         echo "</td><td>" . $data_matkul['sks_mata_kuliah'];
+                                        // echo "</td><td>" . $sks;
                                         echo "</td><td>" . $nilai_huruf_diakui;
                                         echo "</td><td>" . $nilai_angka_diakui;
                                         echo "</td><td>" . $id_perguruan_tinggi;
+                                        echo "</td><td>" . $data_matkul['nama_program_studi'];
                                         echo "</td><td>" . $id_semester . "</td></tr>";
                                         // echo "</td><td>" . $id_aktivitas . "</td></tr>";
                                         // echo "</td><td>" . $id_jenis_keluar;
@@ -279,11 +272,17 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $nama_program_studi = $data_matkul['nama_program_studi'];
 
                                         $insert = "INSERT INTO insertnilaitransfer (
-                                            id_registrasi_mahasiswa, nim, nama_mahasiswa, kode_mata_kuliah_asal, nama_mata_kuliah_asal, 
+                                            -- id_registrasi_mahasiswa, nim, nama_mahasiswa, kode_mata_kuliah_asal, nama_mata_kuliah_asal, 
+                                            -- sks_mata_kuliah_asal, nilai_huruf_asal, id_matkul, sks_mata_kuliah_diakui, nilai_huruf_diakui, nilai_angka_diakui, 
+                                            -- id_perguruan_tinggi, id_semester, nama_program_studi, insertid
+                                            id_registrasi_mahasiswa, nim, kode_mata_kuliah_asal, nama_mata_kuliah_asal, 
                                             sks_mata_kuliah_asal, nilai_huruf_asal, id_matkul, sks_mata_kuliah_diakui, nilai_huruf_diakui, nilai_angka_diakui, 
                                             id_perguruan_tinggi, id_semester, nama_program_studi, insertid
                                         ) VALUES (
-                                            '$id_reg_mhs', '$nim', '$nama_mahasiswa', '$kode_mata_kuliah_asal', '$nama_mata_kuliah_asal', 
+                                            -- '$id_reg_mhs', '$nim', '$nama_mahasiswa', '$kode_mata_kuliah_asal', '$nama_mata_kuliah_asal', 
+                                            -- '$sks_mata_kuliah_asal', '$nilai_huruf_asal', '$id_matkul', '$sks_mata_kuliah_diakui', '$nilai_huruf_diakui', 
+                                            -- '$nilai_angka_diakui', '$id_perguruan_tinggi', '$id_semester', '$nama_program_studi', '$insertid'
+                                            '$id_reg_mhs', '$nim', '$kode_mata_kuliah_asal', '$nama_mata_kuliah_asal', 
                                             '$sks_mata_kuliah_asal', '$nilai_huruf_asal', '$id_matkul', '$sks_mata_kuliah_diakui', '$nilai_huruf_diakui', 
                                             '$nilai_angka_diakui', '$id_perguruan_tinggi', '$id_semester', '$nama_program_studi', '$insertid'
                                         )";
