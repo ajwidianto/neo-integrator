@@ -198,7 +198,7 @@ if (mysqli_num_rows($hasil) > 0) {
                                 $input = $_POST['input'];
                                 $line = explode("\n", $input);
                                 echo "<table class='table table-striped' id='table1' border='1'><tr>
-                                    <th>Baris</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
+                                    <th>Baris</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>Realisasi Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
                                 foreach ($line as $baris) {
                                     $baris = explode("\t", $baris);
                                     if (isset($baris[2])) {
@@ -207,32 +207,38 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $nama_dosen = $baris[0];
                                         $kode_mata_kuliah = $baris[1];
                                         $nama_kelas_kuliah = $baris[2];
-                                        $rencana_minggu_pertemuan = $baris[3];
-                                        $id_jenis_evaluasi = $baris[4];
+                                        $sks_total = $baris[3];
+                                        $rencana_minggu_pertemuan = $baris[4];
+                                        $realisasi_minggu_pertemuan = $baris[5];
+                                        $id_jenis_evaluasi = $baris[6];
                                         $datadosen = cariidregdosen($nama_dosen);
-                                        $datakelaskuliah = caridatakelaskuliah2($kode_mata_kuliah, $nama_kelas_kuliah);
+                                        $datakelaskuliah = caridatakelaskuliah2ext($kode_mata_kuliah);
 
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $nama_dosen;
                                         echo "</td><td>" . $kode_mata_kuliah;
                                         echo "</td><td>" . $nama_kelas_kuliah;
                                         echo "</td><td>" . $rencana_minggu_pertemuan;
+                                        echo "</td><td>" . $realisasi_minggu_pertemuan;
                                         echo "</td><td>" . $id_jenis_evaluasi;
                                         echo "</td><td>" . $datadosen['id_registrasi_dosen'];
-                                        echo "</td><td>" . $datakelaskuliah['id_kelas_kuliah'];
-                                        echo "</td><td>" . $datakelaskuliah['nama_mata_kuliah'];
-                                        echo "</td><td>" . $datakelaskuliah['sks'] . "</td></tr>";
+                                        echo "</td><td>" . $datakelaskuliah['kode_mata_kuliah'];
+                                        // echo "</td><td>" . $datakelaskuliah['nama_mata_kuliah'];
+                                        echo "</td><td>" . $datakelaskuliah['nama_kelas_kuliah'];
+                                        // echo "</td><td>" . $datakelaskuliah['sks'] . "</td></tr>";
+                                        echo "</td><td>" . $sks_total . "</td></tr>";
 
                                         // Pastikan $datakelaskuliah sudah terisi sebelum bagian ini
                                         $id_registrasi_dosen = $datadosen['id_registrasi_dosen'];
-                                        $id_kelas_kuliah = $datakelaskuliah['id_kelas_kuliah'];
-                                        $nama_mata_kuliah = $datakelaskuliah['nama_mata_kuliah'];
+                                        // $id_kelas_kuliah = $datakelaskuliah['id_kelas_kuliah'];
+                                        // $nama_mata_kuliah = $datakelaskuliah['nama_mata_kuliah'];
+                                        $nama_mata_kuliah = $datakelaskuliah['nama_kelas_kuliah'];
                                         $sks = $datakelaskuliah['sks'];
 
                                         $insert = "INSERT INTO insertdosenpengajarkelaskuliah (
-                                            nama_dosen, kode_mata_kuliah, nama_kelas_kuliah, rencana_minggu_pertemuan, id_jenis_evaluasi, id_registrasi_dosen, id_kelas_kuliah, nama_mata_kuliah, sks_substansi_total, insertid
+                                            nama_dosen, kode_mata_kuliah, nama_kelas_kuliah, rencana_minggu_pertemuan, realisasi_minggu_pertemuan, id_jenis_evaluasi, id_registrasi_dosen, id_kelas_kuliah, nama_mata_kuliah, sks_substansi_total, insertid
                                         ) VALUES (
-                                            '$nama_dosen', '$kode_mata_kuliah', '$nama_kelas_kuliah', '$rencana_minggu_pertemuan', '$id_jenis_evaluasi', '$id_registrasi_dosen', '$id_kelas_kuliah', '$nama_mata_kuliah', '$sks', '$insertid'
+                                            '$nama_dosen', '$kode_mata_kuliah', '$nama_kelas_kuliah', '$rencana_minggu_pertemuan', '$realisasi_minggu_pertemuan', '$id_jenis_evaluasi', '$id_registrasi_dosen', '$kode_mata_kuliah', '$nama_mata_kuliah', '$sks_total', '$insertid'
                                         )";
                                         mysqli_query($db, $insert);
                                     }

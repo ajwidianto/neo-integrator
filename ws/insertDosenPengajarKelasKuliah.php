@@ -18,14 +18,15 @@ if (mysqli_num_rows($hasil) > 0) {
             // 'sks_prak_lap_subst' => $x['sks_prak_lap_subst'],
             // 'sks_sim_subst' => $x['sks_sim_subst'],
             'rencana_minggu_pertemuan' => $x['rencana_minggu_pertemuan'],
-            // 'realisasi_minggu_pertemuan' => $x['realisasi_minggu_pertemuan'],
+            'realisasi_minggu_pertemuan' => $x['realisasi_minggu_pertemuan'],
             'id_jenis_evaluasi' => $x['id_jenis_evaluasi']
         );
 
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
-        file_put_contents('log_payload_InsertDosenPengajarKelasKuliah.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. TXT\log_payload_InsertDosenPengajarKelasKuliah.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertDosenPengajarKelasKuliah.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -38,7 +39,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
-        file_put_contents('log_response_InsertDosenPengajarKelasKuliah.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. TXT\log_response_InsertDosenPengajarKelasKuliah.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertDosenPengajarKelasKuliah.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
@@ -46,13 +48,14 @@ if (mysqli_num_rows($hasil) > 0) {
         $err_desc = $ws_result[1]["error_desc"];
 
         if ($err_code == 0) {
-            $update = "UPDATE insertdosenpengajarkelaskuliah SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $id_aktivitas_mengajar = $ws_result[1]['data']["id_aktivitas_mengajar"];
+            $update = "UPDATE insertdosenpengajarkelaskuliah SET err_no='$err_code', err_desc='$err_desc', id_aktivitas_mengajar='$id_aktivitas_mengajar' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertdosenpengajarkelaskuliah SET err_no='$err_code', err_desc='$err_desc' WHERE id=$id";
+            $update = "UPDATE insertdosenpengajarkelaskuliah SET err_no='$err_code', err_desc='$err_desc', id_aktivitas_mengajar='$id_aktivitas_mengajar' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);
@@ -60,7 +63,7 @@ if (mysqli_num_rows($hasil) > 0) {
         }
 
         // Tambahkan delay untuk menghindari throttling API
-        sleep(5); // Delay 1 detik
+        // sleep(5); // Delay 1 detik
     }
 } else {
     echo "data tidak ditemukan";
