@@ -16,17 +16,18 @@ if (mysqli_num_rows($hasil) > 0) {
             'id_semester' => $x['id_semester'],
             'judul' => $x['judul'],
             'keterangan' => $x['keterangan'],
-            'lokasi' => $x['lokasi']
-            // 'sk_tugas' => $x['sk_tugas'],
-            // 'tanggal_sk_tugas' => $x['tanggal_sk_tugas'],
-            // 'tanggal_mulai' => $x['tanggal_mulai'],
-            // 'tanggal_selesai' => $x['tanggal_selesai']
+            'lokasi' => $x['lokasi'],
+            'sk_tugas' => $x['sk_tugas'],
+            'tanggal_sk_tugas' => $x['tanggal_sk_tugas'],
+            'tanggal_mulai' => $x['tanggal_mulai'],
+            'tanggal_selesai' => $x['tanggal_selesai']
         );
 
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
-        file_put_contents('log_payload_InsertAktivitasMahasiswa.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. TXT\log_payload_InsertAktivitasMahasiswa.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertAktivitasMahasiswa.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -39,7 +40,8 @@ if (mysqli_num_rows($hasil) > 0) {
         // Debugging respons dari API
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
-        file_put_contents('log_response_InsertAktivitasMahasiswa.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. TXT\log_response_InsertAktivitasMahasiswa.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertAktivitasMahasiswa.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
@@ -63,7 +65,7 @@ if (mysqli_num_rows($hasil) > 0) {
         }
 
         // Tambahkan delay untuk menghindari throttling API
-        sleep(5); // Delay 1 detik
+        // sleep(1); // Delay 1 detik
     }
 } else {
     echo "data tidak ditemukan";
