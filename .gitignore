@@ -1,2 +1,3 @@
 component/config.php
 *.txt
+*.json
