@@ -8,22 +8,22 @@ if (mysqli_num_rows($hasil) > 0) {
     while ($x = mysqli_fetch_array($hasil)) {
         $id = $x['id'];
 
-        $data = array(
+        $keys = array(
             'id_kelas_kuliah' => $x['id_kelas_kuliah'],
             'id_matkul' => $x['id_matkul'],
         );
 
         // Debugging payload sebelum dikirim
         echo "<pre>Payload yang dikirim ke API:</pre>";
-        print_r($data);
-        file_put_contents('1. TXT\log_payload_insertSalinKomponenEvaluasiMatkul.txt', print_r($data, true), FILE_APPEND); // Logging payload
-        file_put_contents('1. JSON\log_payload_insertSalinKomponenEvaluasiMatkul.json', print_r($data, true), FILE_APPEND); // Logging payload
+        print_r($keys);
+        file_put_contents('1. TXT\log_payload_insertSalinKomponenEvaluasiMatkul.txt', print_r($keys, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_insertSalinKomponenEvaluasiMatkul.json', print_r($keys, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
         // Kirim request ke API
         $act = "SalinKomponenEvaluasiMatkul";
-        $request = $ws->prep_insert($act, $data);
+        $request = $ws->prep_delete($act, $keys);
         print_r($request); // Debugging request
         $ws_result = $ws->run($request);
 
