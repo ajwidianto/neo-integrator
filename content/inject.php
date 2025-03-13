@@ -37,6 +37,7 @@ switch ($act) {
     case "cekBiodata":          $name = "Cek biiodata MAHASISWA";                                   include "ws/cekBiodataMHS.php";break;
     case "nilaitransfermhsimport":     $name = "Nilai Transfer Mahasiswa";    include "content/inject/nilaitransfermhs.php";break;
     case "aktivitasmhsimport":     $name = "Aktivitas Mahasiswa";    include "content/inject/aktivitasmhs.php";break;
+    case "updateaktivitasmhsimport":     $name = "Update Aktivitas Mahasiswa";    include "content/inject/updateaktivitasmhs.php";break;
     case "anggotaaktivitasmhsimport":     $name = "Anggota Aktivitas Mahasiswa";    include "content/inject/anggotaaktivitasmhs.php";break;
     case "bimbingaktivitasmhsimport":     $name = "Bimbing Aktivitas Mahasiswa";    include "content/inject/bimbingaktivitasmhs.php";break;
     case "ujiaktivitasmhsimport":     $name = "Uji Aktivitas Mahasiswa";    include "content/inject/ujiaktivitasmhs.php";break;
