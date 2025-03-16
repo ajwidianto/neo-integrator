@@ -518,8 +518,8 @@ function cariidprodi($kode_program_studi) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    // $filter = "kode_program_studi='$kode_program_studi'";
-    $filter = "id_prodi='$kode_program_studi'";
+    $filter = "kode_program_studi='$kode_program_studi'";
+    // $filter = "id_prodi='$kode_program_studi'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetProdi', $filter, 1, 0);
@@ -581,8 +581,8 @@ function cariidregdosen($nama_dosen) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    // $filter = "nama_dosen='$nama_dosen'";
-    $filter = "nidn='$nama_dosen'";
+    $filter = "nama_dosen='$nama_dosen'";
+    // $filter = "nidn='$nama_dosen'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetListPenugasanDosen', $filter, 1, 0);
@@ -754,6 +754,35 @@ function carikelas(&$kodemk,&$kodekelas,&$semester,$id_kelas_kuliah){
                 $id_kelas_kuliah = $ws_result[1]["data"][0]["id_kelas_kuliah"];	
                 } else {$id_kelas_kuliah = "<code>Tidak Ditemukan</code>";}
         }  
+}
+
+// CARI Data Kelas Kuliah =====================================================================
+function carilistmatakuliah($kode_mata_kuliah, $nama_program_studi) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "kode_mata_kuliah='$kode_mata_kuliah' and nama_program_studi='$nama_program_studi'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListMataKuliah', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $list_mata_kuliah = $ws_result[1]["data"][0];
+        return [
+            'id_matkul' => $list_mata_kuliah['id_matkul'],
+            'sks_mata_kuliah' => $list_mata_kuliah['sks_mata_kuliah'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_matkul' => "<code>ID Matkul Tidak Ditemukan</code>",
+            'sks_mata_kuliah' => "<code>SKS Matkul Tidak Ditemukan</code>",
+        ];
+    }
 }
 
 // PDDIKTI =======================================================
