@@ -9,7 +9,7 @@ if (mysqli_num_rows($hasil) > 0) {
         $id = $x['id'];
 
         $data = array(
-            'id_registrasi_mahasiswa' => $x['id_registrasi_mahasiswa'],
+            'id_transfer' => $x['id_transfer'],
             'kode_mata_kuliah_asal' => $x['kode_mata_kuliah_asal'],
             'nama_mata_kuliah_asal' => $x['nama_mata_kuliah_asal'],
             'sks_mata_kuliah_asal' => $x['sks_mata_kuliah_asal'],
@@ -49,14 +49,14 @@ if (mysqli_num_rows($hasil) > 0) {
         $err_desc = $ws_result[1]["error_desc"];
 
         if ($err_code == 0) {
-            $id_registrasi_mahasiswa = $ws_result[1]['data']["id_registrasi_mahasiswa"];
-            $update = "UPDATE insertnilaitransfer SET err_no='$err_code', err_desc='$err_desc', update_id_registrasi_mahasiswa='$id_registrasi_mahasiswa' WHERE id=$id";
+            $id_transfer = $ws_result[1]['data']["id_transfer"];
+            $update = "UPDATE insertnilaitransfer SET err_no='$err_code', err_desc='$err_desc', id_transfer='$id_transfer' WHERE id=$id";
             mysqli_query($db, $update);
-            $statprogress = "<br>" . $id . ". " . $id_registrasi_mahasiswa;
+            $statprogress = "<br>" . $id . ". " . $id_transfer;
             print_r($statprogress);
             progress($statprogress, $act);
         } else {
-            $update = "UPDATE insertnilaitransfer SET err_no='$err_code', err_desc='$err_desc', update_id_registrasi_mahasiswa='$id_registrasi_mahasiswa' WHERE id=$id";
+            $update = "UPDATE insertnilaitransfer SET err_no='$err_code', err_desc='$err_desc', id_transfer='$id_transfer' WHERE id=$id";
             mysqli_query($db, $update);
             $statprogress = "<br>" . $id . " - " . $err_code . " - " . $err_desc;
             print_r($statprogress);
