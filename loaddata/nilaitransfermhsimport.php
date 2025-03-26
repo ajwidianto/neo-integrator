@@ -20,7 +20,7 @@ if ($show == 'yes') {
         echo "<table class='table table-striped' border='1'><tr>
         <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
         <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>ID Semester</th><th>ID Transfer</th><th>Error</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             if ($x['err_no'] == '0') {
                 $berhasil++;
@@ -40,9 +40,10 @@ if ($show == 'yes') {
             echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
             echo "</td><td>" . $x['nilai_huruf_diakui'];
             echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            // echo "</td><td>" . $x['id_perguruan_tinggi'];
             echo "</td><td>" . $x['id_semester'];
-            echo "</td><td>" . $x['id_aktivitas'];
+            // echo "</td><td>" . $x['id_aktivitas'];
+            echo "</td><td>" . $x['id_transfer'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
         }
@@ -59,7 +60,7 @@ if ($show == 'yes') {
         echo "<table class='table table-striped' border='1'><tr>
         <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
         <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>ID Semester</th><th>ID Transfer</th><th>Error</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['nim'];
@@ -72,9 +73,10 @@ if ($show == 'yes') {
             echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
             echo "</td><td>" . $x['nilai_huruf_diakui'];
             echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            // echo "</td><td>" . $x['id_perguruan_tinggi'];
             echo "</td><td>" . $x['id_semester'];
-            echo "</td><td>" . $x['id_aktivitas'];
+            // echo "</td><td>" . $x['id_aktivitas'];
+            echo "</td><td>" . $x['id_transfer'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
         }
@@ -102,7 +104,7 @@ if ($show == 'yes') {
         echo "<table class='table table-striped' border='1'><tr>
         <th>Baris</th><th>NIM</th><th>NAMA</th><th>Kode Matkul Asal</th><th>Nama Matkul Asal</th><th>SKS Matkul Asal</th><th>Nilai Huruf Asal</th>
         <th>ID Matkul</th><th>SKS Matkul Diakui</th><th>Nilai Huruf Diakui</th><th>Nilai Angka Diakui</th>
-        <th>ID PT</th><th>ID Semester</th><th>ID Aktivitas</th><th>Error</th><th>Description</th></tr>";
+        <th>ID Semester</th><th>ID Transfer</th><th>Error</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['nim'];
@@ -115,9 +117,10 @@ if ($show == 'yes') {
             echo "</td><td>" . $x['sks_mata_kuliah_diakui'];
             echo "</td><td>" . $x['nilai_huruf_diakui'];
             echo "</td><td>" . $x['nilai_angka_diakui'];
-            echo "</td><td>" . $x['id_perguruan_tinggi'];
+            // echo "</td><td>" . $x['id_perguruan_tinggi'];
             echo "</td><td>" . $x['id_semester'];
-            echo "</td><td>" . $x['id_aktivitas'];
+            // echo "</td><td>" . $x['id_aktivitas'];
+            echo "</td><td>" . $x['id_transfer'];
             echo "</td><td>" . $x['err_no'];
             echo "</td><td><code>" . $x['err_desc'] . "</code></td></tr>";
         }

@@ -9,7 +9,7 @@ if (mysqli_num_rows($hasil) > 0) {
         $id = $x['id'];
 
         $data = array(
-            'id_transfer' => $x['id_transfer'],
+            'id_registrasi_mahasiswa' => $x['id_registrasi_mahasiswa'],
             'kode_mata_kuliah_asal' => $x['kode_mata_kuliah_asal'],
             'nama_mata_kuliah_asal' => $x['nama_mata_kuliah_asal'],
             'sks_mata_kuliah_asal' => $x['sks_mata_kuliah_asal'],
