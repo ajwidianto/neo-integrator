@@ -19,7 +19,7 @@ if (mysqli_num_rows($hasil) > 0) {
         echo "<pre>Payload yang dikirim ke API:</pre>";
         print_r($data);
         file_put_contents('1. TXT\log_payload_InsertBimbingAktivitasMahasiswa.txt', print_r($data, true), FILE_APPEND); // Logging payload
-        file_put_contents('1. JSON\log_payload_InsertBimbingAktivitasMahasiswa.txt', print_r($data, true), FILE_APPEND); // Logging payload
+        file_put_contents('1. JSON\log_payload_InsertBimbingAktivitasMahasiswa.json', print_r($data, true), FILE_APPEND); // Logging payload
         ob_flush();
         flush();
 
@@ -33,7 +33,7 @@ if (mysqli_num_rows($hasil) > 0) {
         echo "<pre>Respons dari API Neo-Feeder:</pre>";
         print_r($ws_result);
         file_put_contents('1. TXT\log_response_InsertBimbingAktivitasMahasiswa.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
-        file_put_contents('1. JSON\log_response_InsertBimbingAktivitasMahasiswa.txt', print_r($ws_result, true), FILE_APPEND); // Logging respons
+        file_put_contents('1. JSON\log_response_InsertBimbingAktivitasMahasiswa.json', print_r($ws_result, true), FILE_APPEND); // Logging respons
         ob_flush();
         flush();
 
