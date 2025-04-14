@@ -47,7 +47,7 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>ID Aktivitas</th><th>NIM</th><th>NAMA</th><th>Jenis Peran</th></tr>";
+        <th>Baris</th><th>ID Aktivitas</th><th>ID_Reg_mhs</th><th>NIM</th><th>NAMA</th><th>Jenis Peran</th><th>Err No</th><th>Err Desc</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['id_aktivitas'];
@@ -80,7 +80,7 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>ID Aktivitas</th><th>NIM</th><th>NAMA</th><th>Jenis Peran</th></tr>";
+        <th>Baris</th><th>ID Aktivitas</th><th>ID_Reg_mhs</th><th>NIM</th><th>NAMA</th><th>Jenis Peran</th><th>Err No</th><th>Err Desc</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['id_aktivitas'];
