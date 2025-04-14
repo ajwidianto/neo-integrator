@@ -47,6 +47,7 @@ switch ($act) {
     case "skalanilaiprodiimport":     $name = "Skala Nilai Prodi";    include "content/inject/skalanilaiprodi.php";break;
     case "salinkomponenevaluasimatkulimport":     $name = "Skala Nilai Prodi";    include "content/inject/salinkomponenevaluasimatkul.php";break;
     case "konversiaktivitaskampusmerdekaimport":     $name = "Konversi Aktivitas Kampus Merdeka";    include "content/inject/konversiaktivitaskampusmerdeka.php";break;
+    case "updatenilaiperkuliahanklsimport":     $name = "Update Nilai Perkuliahan Kelas";    include "content/inject/updatenilaiperkuliahankls.php";break;
     
       case "getMahasiswa":
       include "ws/getMahasiswa.php";break;
