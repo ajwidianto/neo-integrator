@@ -95,7 +95,11 @@ switch ($act) {
 
     case "insertpesertakelaskuliah":     include "ws/InsertPesertaKelasKuliah.php";  break;
 
+    case "insertdeletepesertakelaskuliah":     include "ws/DeletePesertaKelasKuliah.php";  break;
+
     case "insertupdatenilaiperkuliahankls":     include "ws/UpdateNilaiPerkuliahanKelas.php";  break;
+
+    case "insertprestasimhs":     include "ws/insertPrestasiMahasiswa.php";  break;
 
     default:
       echo "act is not list, cek exec.php";

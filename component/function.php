@@ -518,8 +518,8 @@ function cariidprodi($kode_program_studi) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    $filter = "kode_program_studi='$kode_program_studi'";
-    // $filter = "id_prodi='$kode_program_studi'";
+    // $filter = "kode_program_studi='$kode_program_studi'";
+    $filter = "id_prodi='$kode_program_studi'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetProdi', $filter, 1, 0);
@@ -554,6 +554,7 @@ function cariiddosen($nidn) {
 
     // Buat filter berdasarkan kode mata kuliah
     $filter = "nidn='$nidn'";
+    // $filter = "nama_dosen='$nidn'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetListDosen', $filter, 1, 0);
@@ -613,6 +614,40 @@ function cariidmahasiswa($nim) {
 
     // Buat filter berdasarkan kode mata kuliah
     $filter = "nim='$nim'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListMahasiswa', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_mahasiswa = $ws_result[1]["data"][0];
+        return [
+            'id_mahasiswa' => $data_mahasiswa['id_mahasiswa'],
+            'id_registrasi_mahasiswa' => $data_mahasiswa['id_registrasi_mahasiswa'],
+            'nama_mahasiswa' => $data_mahasiswa['nama_mahasiswa'],
+            'nama_program_studi' => $data_mahasiswa['nama_program_studi'],
+            'nama_status_mahasiswa' => $data_mahasiswa['nama_status_mahasiswa'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_mahasiswa' => "<code>ID Mahasiswa Tidak Ditemukan</code>",
+            'id_registrasi_mahasiswa' => "<code>ID Reg Mahasiswa Tidak Ditemukan</code>",
+            'nama_mahasiswa' => "<code>Nama Mahasiswa Tidak Ditemukan</code>",
+            'nama_program_studi' => "<code>Program Studi Mahasiswa Tidak Ditemukan</code>",
+            'nama_status_mahasiswa' => "<code>Status Mahasiswa Tidak Ditemukan</code>",
+        ];
+    }
+}
+// CARI ID Mahasiswa =================================================================
+function cariidmahasiswa_kampuscabang($nim, $keyword) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "nim='$nim' and nama_program_studi LIKE '%$keyword%'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetListMahasiswa', $filter, 1, 0);

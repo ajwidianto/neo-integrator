@@ -48,7 +48,9 @@ switch ($act) {
     case "salinkomponenevaluasimatkulimport":     $name = "Skala Nilai Prodi";    include "content/inject/salinkomponenevaluasimatkul.php";break;
     case "konversiaktivitaskampusmerdekaimport":     $name = "Konversi Aktivitas Kampus Merdeka";    include "content/inject/konversiaktivitaskampusmerdeka.php";break;
     case "pesertakelaskuliahimport":     $name = "Peserta Kelas Kuliah";    include "content/inject/pesertakelaskuliah.php";break;
+    case "deletepesertakelaskuliahimport":     $name = "Delete Peserta Kelas Kuliah";    include "content/inject/deletepesertakelaskuliah.php";break;
     case "updatenilaiperkuliahanklsimport":     $name = "Update Nilai Perkuliahan Kelas";    include "content/inject/updatenilaiperkuliahankls.php";break;
+    case "prestasimhsimport":     $name = "Prestasi Mahasiswa";    include "content/inject/prestasimhs.php";break;
     
       case "getMahasiswa":
       include "ws/getMahasiswa.php";break;
