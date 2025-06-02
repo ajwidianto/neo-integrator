@@ -216,8 +216,8 @@ if (mysqli_num_rows($hasil) > 0) {
 
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $nama_dosen;
-                                        echo "</td><td>" . $kode_mata_kuliah;
-                                        echo "</td><td>" . $nama_kelas_kuliah;
+                                        echo "</td><td>" . $datakelaskuliah['kode_mata_kuliah'];
+                                        echo "</td><td>" . $datakelaskuliah['nama_kelas_kuliah'];
                                         echo "</td><td>" . $rencana_minggu_pertemuan;
                                         echo "</td><td>" . $realisasi_minggu_pertemuan;
                                         echo "</td><td>" . $id_jenis_evaluasi;
