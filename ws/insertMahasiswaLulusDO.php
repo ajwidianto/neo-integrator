@@ -22,7 +22,7 @@ if (mysqli_num_rows($hasil) > 0) {
                     'tanggal_keluar' => $x['tanggal_keluar'],
                     'id_periode_keluar' => $x['id_periode_keluar'],
                     'ipk' => $x['ipk'],
-                    // 'nomor_ijazah' => $x['nomor_ijazah'],
+                    // 'nomor_ijazah' => $x['nomor_ijazah'], // nomor_ijasah pada update patch 3.0.1 tidak perlu dikirimkan dan diberikan strip "-"
                     'nomor_sk_yudisium' => $x['nomor_sk_yudisium'],
                     'tanggal_sk_yudisium' => $x['tanggal_sk_yudisium'],
                 );
