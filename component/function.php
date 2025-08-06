@@ -578,12 +578,13 @@ function cariiddosen($nidn) {
     }
 }
 // CARI ID Registrasi Dosen ==========================================================
-function cariidregdosen($nama_dosen) {
+function cariidregdosen($nidn_nuptk) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    $filter = "nama_dosen='$nama_dosen'";
-    // $filter = "nidn='$nama_dosen'";
+    // $filter = "nama_dosen='$nama_dosen'";
+    // $filter = "nidn='$nidn_nuptk'";
+    $filter = "nuptk='$nidn_nuptk'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetListPenugasanDosen', $filter, 1, 0);
@@ -596,6 +597,8 @@ function cariidregdosen($nama_dosen) {
         $data_dosen = $ws_result[1]["data"][0];
         return [
             'id_registrasi_dosen' => $data_dosen['id_registrasi_dosen'],
+            'nidn' => $data_dosen['nidn'],
+            'nuptk' => $data_dosen['nuptk'],
             'nama_dosen' => $data_dosen['nama_dosen'],
             'nama_program_studi' => $data_dosen['nama_program_studi'],
         ];
@@ -603,6 +606,8 @@ function cariidregdosen($nama_dosen) {
         // Kembalikan nilai default jika tidak ditemukan
         return [
             'id_registrasi_dosen' => "<code>ID Registrasi Dosen Tidak Ditemukan</code>",
+            'nidn' => "<code>NIDN Tidak Ditemukan</code>",
+            'nuptk' => "<code>NUPTK Tidak Ditemukan</code>",
             'nama_dosen' => "<code>Nama Dosen Tidak Ditemukan</code>",
             'nama_program_studi' => "<code>Nama Program Studi Tidak Ditemukan</code>",
         ];

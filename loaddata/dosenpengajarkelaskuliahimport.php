@@ -18,7 +18,7 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
+        <th>Baris</th><th>NIDN/NUPT</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             if ($x['err_no'] == '0') {
                 $berhasil++;
@@ -28,6 +28,7 @@ if ($show == 'yes') {
                 $gagal++;
             }
             echo "<tr><td>" . $no++;
+            echo "</td><td>" . $x['nidn_nuptk'];
             echo "</td><td>" . $x['nama_dosen'];
             echo "</td><td>" . $x['kode_mata_kuliah'];
             echo "</td><td>" . $x['nama_kelas_kuliah'];
@@ -51,9 +52,10 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
+        <th>Baris</th><th>NIDN/NUPT</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
+            echo "</td><td>" . $x['nidn_nuptk'];
             echo "</td><td>" . $x['nama_dosen'];
             echo "</td><td>" . $x['kode_mata_kuliah'];
             echo "</td><td>" . $x['nama_kelas_kuliah'];
@@ -88,9 +90,10 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
+        <th>Baris</th><th>NIDN/NUPT</th><th>Nama Dosen</th><th>Kode MK</th><th>Nama MK</th><th>Rencana Minggu Pertemuan</th><th>ID Jenis Evaluasi</th><th>ID Reg Dosen</th><th>ID Kelas Kuliah</th><th>Nama MK</th><th>SKS</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
+            echo "</td><td>" . $x['nidn_nuptk'];
             echo "</td><td>" . $x['nama_dosen'];
             echo "</td><td>" . $x['kode_mata_kuliah'];
             echo "</td><td>" . $x['nama_kelas_kuliah'];
