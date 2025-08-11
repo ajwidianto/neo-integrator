@@ -201,14 +201,14 @@ if (mysqli_num_rows($hasil) > 0) {
                                 $input = $_POST['input'];
                                 $line = explode("\n", $input);
                                 echo "<table class='table table-striped' id='table1' border='1'><tr>
-                                    <th>Baris</th><th>ID Aktivitas</th><th>NIDN</th><th>NAMA DOSEN</th><th>ID DOSEN</th><th>Kategori Kegiatan</th><th>Pembimbing Ke-</th></tr>";
+                                    <th>Baris</th><th>ID Aktivitas</th><th>NIDN/NUPTK</th><th>NAMA DOSEN</th><th>ID DOSEN</th><th>Kategori Kegiatan</th><th>Pembimbing Ke-</th></tr>";
                                 foreach ($line as $baris) {
                                     $baris = explode("\t", $baris);
                                     if (isset($baris[2])) {
                                         $no++;
                                         str_replace('"', '', $baris);
-                                        $nidn = $baris[0];
-                                        $datadosen = cariiddosen($nidn);
+                                        $nidn_nuptk = $baris[0];
+                                        $datadosen = cariiddosen($nidn_nuptk);
                                         // $nama_mahasiswa = $nama;
                                         $id_aktivitas = $baris[1];
                                         $id_kategori_kegiatan = $baris[2];
@@ -216,7 +216,7 @@ if (mysqli_num_rows($hasil) > 0) {
 
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $id_aktivitas;
-                                        echo "</td><td>" . $nidn;
+                                        echo "</td><td>" . $nidn_nuptk;
                                         echo "</td><td>" . $datadosen['nama_dosen'];;
                                         echo "</td><td>" . $datadosen['id_dosen'];
                                         echo "</td><td>" . $id_kategori_kegiatan;
@@ -227,9 +227,9 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $id_dosen = $datadosen['id_dosen'] ?? 'Tidak Ditemukan';
 
                                         $insert = "INSERT INTO insertbimbingaktivitasmahasiswa (
-                                            id_aktivitas, nidn, nama_dosen, id_dosen, id_kategori_kegiatan, pembimbing_ke, insertid
+                                            id_aktivitas, nidn_nuptk, nama_dosen, id_dosen, id_kategori_kegiatan, pembimbing_ke, insertid
                                         ) VALUES (
-                                            '$id_aktivitas', '$nidn', '$nama_dosen', '$id_dosen', '$id_kategori_kegiatan', '$pembimbing_ke', '$insertid'
+                                            '$id_aktivitas', '$nidn_nuptk', '$nama_dosen', '$id_dosen', '$id_kategori_kegiatan', '$pembimbing_ke', '$insertid'
                                         )";
                                         mysqli_query($db, $insert);
                                     }

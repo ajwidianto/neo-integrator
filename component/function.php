@@ -549,12 +549,13 @@ function cariidprodi($kode_program_studi) {
     }
 }
 // CARI ID Dosen =====================================================================
-function cariiddosen($nidn) {
+function cariiddosen($nidn_nuptk) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    $filter = "nidn='$nidn'";
-    // $filter = "nama_dosen='$nidn'";
+    // $filter = "nidn='$nidn_nuptk'";
+    $filter = "nuptk='$nidn_nuptk'";
+    // $filter = "nama_dosen='$nidn_nuptk'";
 
     // Siapkan request ke web service
     $request = $ws->prep_get('GetListDosen', $filter, 1, 0);
