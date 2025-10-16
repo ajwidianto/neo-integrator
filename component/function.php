@@ -403,6 +403,36 @@ function cariidregmhs(&$nim,&$id_reg_mhs,&$nama,&$prodi){
                 } 
 }
 
+
+// CARI ID REG IDMAHASIWA berdasarkan NIM ==============================================================
+function cariidmhs2(&$nim,&$id_reg_mhs,&$nama,&$prodi){
+    require "component/config.php";
+    // cariidblokal
+    $query = "SELECT a.nama_mahasiswa, a.id_registrasi_mahasiswa, a.id_prodi, a.nama_program_studi FROM getmahasiswa AS a WHERE nim ='$nim'";
+    $hasil = mysqli_query($db, $query);
+    if(mysqli_num_rows($hasil) > 0 ){
+        while($x = mysqli_fetch_array($hasil)){
+            $id_reg_mhs = $x['id_registrasi_mahasiswa'];
+            $nama = $x['nama_mahasiswa'];
+            $prodi = $x['nama_program_studi'];
+        }}
+        else        //cari di WS
+        {
+            $filter = "nim='$nim'"; //cek berdasarkan NIM
+            $request = $ws->prep_get('GetListMahasiswa',$filter,1,0);
+            $ws_result = $ws->run($request);
+            // $ws->view($ws_result);
+            if (isset($ws_result[1]["data"][0]["id_registrasi_mahasiswa"])) {
+                $id_reg_mhs = $ws_result[1]["data"][0]["id_registrasi_mahasiswa"];	
+                $nama = $ws_result[1]["data"][0]["nama_mahasiswa"];	
+                $prodi = $ws_result[1]["data"][0]["nama_program_studi"];	
+                } else {
+                    $id_reg_mhs=$nama = "<code>Tidak Ditemukan</code>";
+                    
+                }  
+                } 
+}
+
 // CARI ID BIODATA MAHASISWA ==============================================================
 function caribiomhs(&$nim,&$nama,&$jk,&$tl,&$prodi,&$status){
     require "component/config.php";
@@ -548,13 +578,51 @@ function cariidprodi($kode_program_studi) {
         ];
     }
 }
+// CARI ID Prodi dari GetAllProdi =====================================================================
+function cariallidprodi($id_prodi_asal) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    // $filter = "kode_program_studi='$id_prodi_asal'";
+    $filter = "id_prodi='$id_prodi_asal'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetAllProdi', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_prodi = $ws_result[1]["data"][0];
+        return [
+            'id_perguruan_tinggi' => $data_prodi['id_perguruan_tinggi'],
+            'kode_perguruan_tinggi' => $data_prodi['kode_perguruan_tinggi'],
+            'nama_perguruan_tinggi' => $data_prodi['nama_perguruan_tinggi'],
+            'id_prodi' => $data_prodi['id_prodi'],
+            'kode_program_studii' => $data_prodi['kode_program_studi'],
+            'nama_program_studi' => $data_prodi['nama_program_studi'],
+            'id_jenjang_pendidikan' => $data_prodi['id_jenjang_pendidikan'],
+            'nama_jenjang_pendidikan' => $data_prodi['nama_jenjang_pendidikan'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            'id_prodi' => "<code>ID Program Studi Tidak Ditemukan</code>",
+            'kode_program_studii' => "<code>Kode Program Studi Tidak Ditemukan</code>",
+            'nama_program_studi' => "<code>Nama Program Studi Tidak Ditemukan</code>",
+            'id_jenjang_pendidikan' => "<code>ID Jenjang Pendidikan Tidak Ditemukan</code>",
+            'nama_jenjang_pendidikan' => "<code>Nama Jenjang Pendidikan Tidak Ditemukan</code>",
+        ];
+    }
+}
 // CARI ID Dosen =====================================================================
 function cariiddosen($nidn_nuptk) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service
 
     // Buat filter berdasarkan kode mata kuliah
-    // $filter = "nidn='$nidn_nuptk'";
-    $filter = "nuptk='$nidn_nuptk'";
+    $filter = "nidn='$nidn_nuptk'";
+    // $filter = "nuptk='$nidn_nuptk'";
     // $filter = "nama_dosen='$nidn_nuptk'";
 
     // Siapkan request ke web service
