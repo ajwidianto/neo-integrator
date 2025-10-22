@@ -748,6 +748,34 @@ function cariidmahasiswa_kampuscabang($nim, $keyword) {
         ];
     }
 }
+// CARI ID Mahasiswa =================================================================
+function cariidmahasiswa_by_id_mahasiswa($id_mahasiswa) {
+    require "component/config.php"; // Load konfigurasi dan koneksi web service
+
+    // Buat filter berdasarkan kode mata kuliah
+    $filter = "id_mahasiswa='$id_mahasiswa'";
+
+    // Siapkan request ke web service
+    $request = $ws->prep_get('GetListMahasiswa', $filter, 1, 0);
+
+    // Jalankan request
+    $ws_result = $ws->run($request);
+
+    // Periksa apakah data ditemukan
+    if (isset($ws_result[1]["data"][0])) {
+        $data_mahasiswa = $ws_result[1]["data"][0];
+        return [
+            // 'id_mahasiswa' => $data_mahasiswa['id_mahasiswa'],
+            'nama_mahasiswa' => $data_mahasiswa['nama_mahasiswa'],
+        ];
+    } else {
+        // Kembalikan nilai default jika tidak ditemukan
+        return [
+            // 'id_mahasiswa' => "<code>ID Mahasiswa Tidak Ditemukan</code>",
+            'nama_mahasiswa' => "<code>Nama Mahasiswa Tidak Ditemukan</code>",
+        ];
+    }
+}
 // CARI Data Kelas Kuliah =====================================================================
 function caridatakelaskuliah($id_kelas_kuliah) {
     require "component/config.php"; // Load konfigurasi dan koneksi web service

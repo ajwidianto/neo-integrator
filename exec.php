@@ -105,6 +105,8 @@ switch ($act) {
 
     case "insertriwayatpendidikanmahasiswa":     include "ws/insertRiwayatPendidikanMahasiswa.php";  break;
 
+    case "insertupdatebiodatamahasiswa":     include "ws/UpdateBiodataMahasiswa.php";  break;
+
     default:
       echo "act is not list, cek exec.php";
   }
