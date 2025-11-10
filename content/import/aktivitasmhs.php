@@ -217,7 +217,7 @@ if (mysqli_num_rows($hasil) > 0) {
                                 $input = $_POST['input'];
                                 $line = explode("\n", $input);
                                 echo "<table class='table table-striped' id='table1' border='1'><tr>
-    <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang Pendidikan</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+    <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
     <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th></tr>";
                                 foreach ($line as $baris) {
                                     $baris = explode("\t", $baris);
@@ -237,12 +237,12 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $lokasi = $baris[9];
                                         $tanggal_mulai = $baris[10];
                                         $tanggal_selesai = $baris[11];
+                                        $program_studi = $data_prodi['nama_jenjang_pendidikan'] . " " . $data_prodi['nama_program_studi'];
 
                                         echo "<tr><td>" . $no;
                                         echo "</td><td>" . $program_mbkm;
                                         echo "</td><td>" . $data_prodi['id_prodi'];
-                                        echo "</td><td>" . $data_prodi['nama_jenjang_pendidikan'];
-                                        echo "</td><td>" . $data_prodi['nama_program_studi'];
+                                        echo "</td><td>" . $program_studi;
                                         echo "</td><td>" . $id_semester;
                                         echo "</td><td>" . $sk_tugas;
                                         echo "</td><td>" . $tanggal_sk_tugas;
@@ -260,12 +260,12 @@ if (mysqli_num_rows($hasil) > 0) {
                                         $nama_program_studi = $data_prodi['nama_program_studi'] ?? 'Tidak Ditemukan';
 
                                         $insert = "INSERT INTO insertaktivitasmahasiswa (
-                                            id_prodi, nama_jenjang_pendidikan, nama_program_studi, id_semester, judul, keterangan, lokasi, 
-                                            program_mbkm, id_jenis_aktivitas, jenis_anggota, sk_tugas, tanggal_sk_tugas, tanggal_mulai, tanggal_selesai, 
+                                            id_prodi, program_studi, id_semester, judul, keterangan, lokasi, program_mbkm, 
+                                            id_jenis_aktivitas, jenis_anggota, sk_tugas, tanggal_sk_tugas, tanggal_mulai, tanggal_selesai, 
                                             insertid
                                         ) VALUES (
-                                            '$id_prodi', '$nama_jenjang_pendidikan', '$nama_program_studi', '$id_semester', '$judul', '$keterangan', '$lokasi', 
-                                            '$program_mbkm', '$id_jenis_aktivitas', '$jenis_anggota', '$sk_tugas', '$tanggal_sk_tugas', '$tanggal_mulai', 
+                                            '$id_prodi', '$program_studi', '$id_semester', '$judul', '$keterangan', '$lokasi', '$program_mbkm', 
+                                            '$id_jenis_aktivitas', '$jenis_anggota', '$sk_tugas', '$tanggal_sk_tugas', '$tanggal_mulai', 
                                             '$tanggal_selesai', '$insertid'
                                         )";
                                         mysqli_query($db, $insert);

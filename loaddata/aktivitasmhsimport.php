@@ -18,8 +18,8 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
-        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             if ($x['err_no'] == '0') {
                 $berhasil++;
@@ -31,8 +31,7 @@ if ($show == 'yes') {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['program_mbkm'];
             echo "</td><td>" . $x['id_prodi'];
-            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
-            echo "</td><td>" . $x['nama_program_studi'];
+            echo "</td><td>" . $x['program_studi'];
             echo "</td><td>" . $x['id_semester'];
             echo "</td><td>" . $x['sk_tugas'];
             echo "</td><td>" . $x['tanggal_sk_tugas'];
@@ -58,14 +57,13 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
-        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['program_mbkm'];
             echo "</td><td>" . $x['id_prodi'];
-            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
-            echo "</td><td>" . $x['nama_program_studi'];
+            echo "</td><td>" . $x['program_studi'];
             echo "</td><td>" . $x['id_semester'];
             echo "</td><td>" . $x['sk_tugas'];
             echo "</td><td>" . $x['tanggal_sk_tugas'];
@@ -102,14 +100,13 @@ if ($show == 'yes') {
     $hasil = mysqli_query($db, $query);
     if (mysqli_num_rows($hasil) > 0) {
         echo "<table class='table table-striped' border='1'><tr>
-        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Jenjang</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
-        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th></tr>";
+        <th>Baris</th><th>Program MBKM</th><th>Kode Program Studi</th><th>Nama Program Studi</th><th>ID Semester</th><th>Nomor SK Tugas</th><th>Tanggal SK Tugas</th>
+        <th>Jenis Aktivitas</th><th>Jenis Anggota</th><th>Judul</th><th>Keterangan</th><th>Lokasi</th><th>Tanggal Mulai</th><th>Tanggal Akhir</th><th>ID Aktivitas</th><th>Kode Eror</th><th>Description</th></tr>";
         while ($x = mysqli_fetch_array($hasil)) {
             echo "<tr><td>" . $no++;
             echo "</td><td>" . $x['program_mbkm'];
             echo "</td><td>" . $x['id_prodi'];
-            echo "</td><td>" . $x['nama_jenjang_pendidikan'];
-            echo "</td><td>" . $x['nama_program_studi'];
+            echo "</td><td>" . $x['program_studi'];
             echo "</td><td>" . $x['id_semester'];
             echo "</td><td>" . $x['sk_tugas'];
             echo "</td><td>" . $x['tanggal_sk_tugas'];
