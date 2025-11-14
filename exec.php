@@ -95,6 +95,8 @@ switch ($act) {
 
     case "insertkonversiaktivitaskampusmerdeka":     include "ws/insertKonversiAktivitasKampusMerdeka.php";  break;
 
+    case "insertdeletekonversiaktivitaskampusmerdeka":     include "ws/DeleteKonversiAktivitasKampusMerdeka.php";  break;
+
     case "insertpesertakelaskuliah":     include "ws/InsertPesertaKelasKuliah.php";  break;
 
     case "insertdeletepesertakelaskuliah":     include "ws/DeletePesertaKelasKuliah.php";  break;
